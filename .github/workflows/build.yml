@@ -42,4 +42,11 @@ jobs:
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: msbuild /m /p:Configuration=${{matrix.build_config}} build\vtflib.sln
-
+      
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+          name: VTFLib-Windows
+          path: |
+            ${{github.workspace}}/build/Release/*.dll
+          retention-days: 5
